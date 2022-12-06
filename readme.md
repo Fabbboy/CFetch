@@ -13,8 +13,9 @@ make
 ```
 4. Link the library
 
-
-## usage
+**!!IMPROTANT THIS WORKS IF YOU ON MACOSX AND INSTALLED THE LIBS WITH HOMEBREW!!
+else you have to change the path to the libs**
+## Usage
 This example gets the current bitcoin price in USD
 ```c
 int main() {
@@ -26,5 +27,17 @@ int main() {
     }
     return 0;
 }
-
+```
+Sends a JSON POST request
+```c
+int main() {
+    Fetch *fetch = setup_fetch("localhost:3000");
+    if (fetch) {
+        char* header = "Content-Type: application/json";
+        char* body = "{\"name\":\"test\"}";
+        cJSON* response = fetch->post(fetch, body, header);
+        printf("%s", cJSON_Print(response));
+    }
+    return 0;
+}
 ```

@@ -3,11 +3,12 @@
 #include "fetch/include/Fetch.h"
 
 int main() {
-    Fetch *fetch = setup_fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd");
+    Fetch *fetch = setup_fetch("localhost:3000");
     if (fetch) {
-        cJSON *response = fetch->get(fetch);
-        char* btcusd = cJSON_Print(cJSON_GetObjectItem(cJSON_GetObjectItem(cJSON_GetObjectItem(response, "data"), "bitcoin"), "usd"));
-        printf("BTC/USD: %s", btcusd);
+        char* header = "Content-Type: application/json";
+        char* body = "{\"name\":\"test\"}";
+        cJSON* response = fetch->post(fetch, body, header);
+        printf("%s", cJSON_Print(response));
     }
     return 0;
 }

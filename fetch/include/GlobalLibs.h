@@ -2,5 +2,5 @@
 
 #include "curl/curl.h"
 
-#include "cJSON/cJSON.h"
+#include "cjson/cJSON.h"
 
